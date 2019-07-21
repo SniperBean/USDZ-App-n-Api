@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => 'web'], function () {
+    Route::get('/', '\L5Swagger\Http\Controllers\SwaggerController@api')->name('l5swagger.api');
+});
+
+Route::group(['prefix' => '/USDZ/search'], function () {
+    Route::post('/GET', 'USDZController@getUSDZ');
 });
